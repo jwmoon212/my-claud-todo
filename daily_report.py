@@ -151,15 +151,17 @@ def analyse_iko(hist, mkt_hist):
     }
 
 # ── Korean tech correlation ──────────────────────────────────────────────────────
-KOREAN_PEERS = {
+AI_PEERS = {
     "Samsung Electronics": "005930.KS",
     "SK Hynix":            "000660.KS",
     "KOSPI Index":         "^KS11",
+    "Nvidia":              "NVDA",
+    "TSMC":                "TSM",
 }
 
 def get_korean_tech():
     results = {}
-    for name, ticker in KOREAN_PEERS.items():
+    for name, ticker in AI_PEERS.items():
         hist = fetch(ticker, "5d")
         if hist is None or len(hist) < 2:
             results[name] = None
@@ -179,7 +181,7 @@ def get_korean_tech():
 def korean_narrative(peers):
     """Derive macro tailwind/headwind from Samsung + SK Hynix moves."""
     lines = []
-    lines.append("[ Korean Tech Peers - Market Narrative ]")
+    lines.append("[ AI Supply Chain Peers - Market Narrative ]")
 
     scores = []
     for name, data in peers.items():
