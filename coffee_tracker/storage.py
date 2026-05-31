@@ -80,3 +80,17 @@ def set_goal(cups):
 
 def get_goal():
     return _load().get("daily_goal")
+
+
+def restore_entry(entry):
+    data = _load()
+    if not any(e["id"] == entry["id"] for e in data["entries"]):
+        data["entries"].append(entry)
+        data["entries"].sort(key=lambda e: e["id"])
+        _save(data)
+
+
+def clear_goal():
+    data = _load()
+    data["daily_goal"] = None
+    _save(data)
